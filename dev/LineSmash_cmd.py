@@ -5,31 +5,56 @@ This command smashes selected curves into a single line,
 and deletes the original curves.
 """
 
-from doctools import AddCurve, Delete, Geometry, GetSelectedCurves
-from geometry.fit import LineFit
+from Rhino.Geometry.Line import TryFitLineToPoints
+
+from command import SUCCESS, FAILURE
+from doctools import AddCurve, DocObjects
+from geometry import sample, DeformableLine
 
 
 def RunCommand(is_interactive):
     """Linesmash selected curves."""
 
-    curves = GetSelectedCurves()  # Type: Rhino.Doc.DocObject<Curve>
-    print("Selected curves: {}".format(len(curves)))
+    # Grab selected items
+    objects = DocObjects.GetSelected()
 
-    if not curves:
-        print("No curves selected.")
-        return 1
+    # Fail soft for empty selection
+    if not objects:
+        print("No items selected. Doing nothing.")
+        return SUCCESS
 
-    print("Fitting line to curves.")
+    # Report selection
+    print(
+        "Selected {} curves and {} points".format(
+            len(objects.curves), len(objects.points)
+        )
+    )
 
-    curve_geometry = Geometry(curves)  # Type: Rhino.Geometry.Curve[]
-    print("Curve geometry: {}".format(len(curve_geometry)))
+    # Preprocess objects into points
+    points = sample(objects)
 
-    line = LineFit(curve_geometry, type="deformable")  # Type: Rhino.Geometry.Curve
-    print("Line geometry: {}".format(line))
+    # Fail soft for single point sample
+    if len(points) == 1:
+        print("Only one point in input sample. Doing nothing.")
+        return SUCCESS
 
+    # Fit geometry
+    print("Fitting line to {} points.".format(len(points)))
+    success, line = TryFitLineToPoints(points)
+
+    # Fail hard on fit failure
+    if not success:
+        print("Line Fit Error: Fit operation has failed")
+        return FAILURE
+
+    # Generate a deformable line
+    line = DeformableLine(line)
+
+    # Add generated geometry to document
     AddCurve(line)
-    print("Deleting curves.")
 
-    Delete(curves)
+    # Delete input geometry
+    print("Deleting inputs.")
+    objects.delete()
 
-    return 0
+    return SUCCESS
