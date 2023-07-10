@@ -2,7 +2,7 @@
 
 from Rhino.Geometry.Curve import CreateControlPointCurve
 
-from point import interpolate
+from interpolate import interpolate
 
 
 def DeformableLine(input):  # Type: Line, Iterable[float] -> Curve
