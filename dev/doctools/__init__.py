@@ -12,7 +12,7 @@ CURVE = 4
 
 
 class DocData:
-    ...
+    pass
 
 
 class DocObjects:
@@ -50,6 +50,7 @@ class DocObjects:
         doc.Objects.UnselectAll()
 
 
-AddCurve = doc.Objects.AddCurve  # Geometry.Curve -> DocObject<Curve>
-AddCircle = doc.Objects.AddCircle  # Geometry.Circle -> DocObject<Circle>
-AddLine = doc.Objects.AddLine  # Geometry.Line -> DocObject<Line>
+AddCurve = doc.Objects.AddCurve
+AddCircle = doc.Objects.AddCircle
+AddLine = doc.Objects.AddLine
+AddPoint = doc.Objects.AddPoint
