@@ -53,6 +53,16 @@ class RadiusRepo(ValueRepo):
         next_value = self.values[next_index]
         self.set(next_value)
 
+    def reset(self):
+        self.set(self.default_value)
+
+
+class DefaultRepo:
+    default_value = None
+
+    def reset(self):
+        self.set(self.default_value)
+
 
 radius_repo = RadiusRepo()
 debug("Current Fast Fillet Radius:", radius_repo.get())
