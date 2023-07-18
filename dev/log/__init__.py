@@ -43,6 +43,9 @@ def format_msgs(level, msgs):
         line,
         function,
     )
+
+    # Convert numbers to strings for python 2.7 join
+    msgs = [str(msg) for msg in msgs]
     msgs = " ".join(msgs)
     message_string = "{}\n{}".format(header, msgs)
     return message_string
