@@ -8,6 +8,7 @@ class RadiusRepo(ValueRepo):
     default_value = 0.25
 
     values = [
+        0.1875,
         0.25,
         0.5,
         0.6,
