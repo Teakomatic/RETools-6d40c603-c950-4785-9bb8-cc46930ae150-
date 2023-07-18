@@ -22,7 +22,7 @@ from doctools import DocObjects, AddPoint, AddLine
 from geometry import closest, ease
 from repo import radius_repo
 
-DEBUG = True
+DEBUG = False
 
 FILLET_OPTIONS = {
     "join": True,
