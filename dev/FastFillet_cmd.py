@@ -15,6 +15,8 @@ from Rhino.Geometry import Point3d
 from scriptcontext import doc
 from Rhino.Collections import Point3dList
 
+from log import info
+
 from command import SUCCESS
 from doctools import DocObjects, AddPoint, AddLine
 from geometry import closest, ease
@@ -35,7 +37,7 @@ FILLET_OPTIONS = {
 def RunCommand(is_interactive):
     # Fetch current radius
     FILLET_OPTIONS["radius"] = radius_repo.get()
-    print("Current radius is {}".format(FILLET_OPTIONS["radius"]))
+    info("Current radius is {}".format(FILLET_OPTIONS["radius"]))
 
     # Get selected curve geometry
     curve_docobjects = DocObjects.GetSelected().curves
@@ -44,7 +46,7 @@ def RunCommand(is_interactive):
 
     # Fail soft for invalid selection
     if n not in {1, 2}:
-        print("Please select one or two curves. {} selected.".format(n))
+        info("Please select one or two curves. {} selected.".format(n))
 
         # Deselect if 3+ objects selected
         if n > 2:
@@ -81,7 +83,7 @@ def RunCommand(is_interactive):
         # Deselect inputs if failed with two curves
         if len(curves) == 2:
             DocObjects.DeselectAll()
-        print("Fillet Failed")
+        info("Fillet Failed")
         return SUCCESS
 
     # Add filleted geometry

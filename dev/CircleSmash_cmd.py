@@ -10,6 +10,7 @@ from Rhino.Geometry.Circle import TryFitCircleToPoints
 from command import SUCCESS, FAILURE
 from doctools import AddCircle, DocObjects
 from geometry import sample
+from log import info
 
 
 def RunCommand(is_interactive):
@@ -20,11 +21,11 @@ def RunCommand(is_interactive):
 
     # Fail soft for empty selection
     if not objects:
-        print("No items selected. Doing nothing.")
+        info("No items selected. Doing nothing.")
         return SUCCESS
 
     # Report selection
-    print(
+    info(
         "Selected {} curves and {} points".format(
             len(objects.curves), len(objects.points)
         )
@@ -35,23 +36,23 @@ def RunCommand(is_interactive):
 
     # Fail soft for single point sample
     if len(points) == 1:
-        print("Only one point in input sample. Doing nothing.")
+        info("Only one point in input sample. Doing nothing.")
         return SUCCESS
 
     # Fit geometry
-    print("Fitting circle to {} points.".format(len(points)))
+    info("Fitting circle to {} points.".format(len(points)))
     success, circle = TryFitCircleToPoints(points)
 
     # Fail hard on fit failure
     if not success:
-        print("Circle Fit Error: Fit operation has failed")
+        info("Circle Fit Error: Fit operation has failed")
         return FAILURE
 
     # Add generated geometry to document
     AddCircle(circle)
 
     # Delete input geometry
-    print("Deleting curves.")
+    info("Deleting curves.")
     objects.delete()
 
     return SUCCESS

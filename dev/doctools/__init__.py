@@ -28,7 +28,7 @@ class DocObjects:
             elif type == POINT:
                 self.points.append(item)
             else:
-                print("Warning: Selected nonstandard geometry")
+                info("Warning: Selected nonstandard geometry")
                 self.others.append(item)
 
     def __nonzero__(self):

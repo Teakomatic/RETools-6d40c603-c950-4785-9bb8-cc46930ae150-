@@ -5,15 +5,16 @@ This command increases the radius.
 """
 
 from command import SUCCESS
+from log import info
 from repo import radius_repo
 
 
 def RunCommand(is_interactive):
-    print("Current radius is {}".format(radius_repo.get()))
+    info("Current radius is {}".format(radius_repo.get()))
 
-    print("Decreasing radius")
+    info("Decreasing radius")
     radius_repo.down()
 
-    print("New radius is {}".format(radius_repo.get()))
+    info("New radius is {}".format(radius_repo.get()))
 
     return SUCCESS

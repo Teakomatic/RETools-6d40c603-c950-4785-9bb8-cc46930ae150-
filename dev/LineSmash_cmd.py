@@ -10,6 +10,7 @@ from Rhino.Geometry.Line import TryFitLineToPoints
 from command import SUCCESS, FAILURE
 from doctools import AddCurve, DocObjects
 from geometry import sample, DeformableLine
+from log import info
 
 
 def RunCommand(is_interactive):
@@ -20,31 +21,27 @@ def RunCommand(is_interactive):
 
     # Fail soft for empty selection
     if not objects:
-        print("No items selected. Doing nothing.")
+        info("No items selected. Doing nothing.")
         return SUCCESS
 
     # Report selection
-    print(
-        "Selected {} curves and {} points".format(
-            len(objects.curves), len(objects.points)
-        )
-    )
+    info("Selected", len(objects.curves), "curves and", len(objects.points), "points")
 
     # Preprocess objects into points
     points = sample(objects)
 
     # Fail soft for single point sample
     if len(points) == 1:
-        print("Only one point in input sample. Doing nothing.")
+        info("Only one point in input sample. Doing nothing.")
         return SUCCESS
 
     # Fit geometry
-    print("Fitting line to {} points.".format(len(points)))
+    info("Fitting line to", len(points), "points.")
     success, line = TryFitLineToPoints(points)
 
     # Fail hard on fit failure
     if not success:
-        print("Line Fit Error: Fit operation has failed")
+        info("Line Fit Error: Fit operation has failed")
         return FAILURE
 
     # Generate a deformable line
@@ -54,7 +51,7 @@ def RunCommand(is_interactive):
     AddCurve(line)
 
     # Delete input geometry
-    print("Deleting inputs.")
+    info("Deleting inputs.")
     objects.delete()
 
     return SUCCESS
