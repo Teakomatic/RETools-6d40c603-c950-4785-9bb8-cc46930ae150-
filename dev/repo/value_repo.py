@@ -1,5 +1,5 @@
 from scriptcontext import doc
-from log import debug
+from services.log import debug
 
 
 class ValueRepo:
@@ -15,18 +15,16 @@ class ValueRepo:
         pass
 
     def get(self):
-        # Grab value
-        debug("Repo:", ".".join([self.section, self.entry]))
-        debug("Value Type:", self.value_type)
-        debug("Default value:", self.default_value)
-
+        debug("Repo: {}".format(".".join([self.section, self.entry])))
+        debug("Value Type:{}".format(self.value_type))
+        debug("Default value: {}".format(self.default_value))
         debug("Grabbing Value String")
         value_str = doc.Strings.GetValue(
             self.section,
             self.entry,
         )
 
-        debug("Value string:", value_str)
+        debug("Value string: {}".format(value_str))
         # Initialize value if necessary
         if value_str in ["", None]:
             debug("Initializing value repo")

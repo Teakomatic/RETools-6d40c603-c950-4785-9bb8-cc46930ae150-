@@ -1,5 +1,5 @@
 from repo.value_repo import ValueRepo
-from log import debug
+from services.log import info
 
 
 class RadiusRepo(ValueRepo):
@@ -65,4 +65,4 @@ class DefaultRepo:
 
 
 radius_repo = RadiusRepo()
-debug("Current Fast Fillet Radius:", radius_repo.get())
+info("Current Fast Fillet Radius: {}".format(radius_repo.get()))
