@@ -9,15 +9,15 @@ import sys
 from __plugin__ import title as plugin_name, version
 
 from command import SUCCESS
-from log import info
+from services.log import info
 
 
 def RunCommand(is_interactive):
     """Print Diagnostic Information for Retools."""
 
     # Plugin Name & Version
-    info("Plugin:", plugin_name)
-    info("Version:", version)
+    info("Plugin: {}".format(plugin_name))
+    info("Version: {}".format(version))
     info("")
 
     # Python Path

@@ -15,7 +15,7 @@ from Rhino.Geometry import Point3d
 from scriptcontext import doc
 from Rhino.Collections import Point3dList
 
-from log import info
+from services.log import info
 
 from command import SUCCESS
 from doctools import DocObjects, AddPoint, AddLine

@@ -10,7 +10,7 @@ from Rhino.Geometry.Circle import TryFitCircleToPoints
 from command import SUCCESS, FAILURE
 from doctools import AddCircle, DocObjects
 from geometry import sample
-from log import info
+from services.log import info
 
 
 def RunCommand(is_interactive):

@@ -5,7 +5,7 @@ This command increases the radius.
 """
 
 from command import SUCCESS
-from log import info
+from services.log import info
 from repo import radius_repo
 
 

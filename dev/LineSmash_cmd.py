@@ -10,7 +10,7 @@ from Rhino.Geometry.Line import TryFitLineToPoints
 from command import SUCCESS, FAILURE
 from doctools import AddCurve, DocObjects
 from geometry import sample, DeformableLine
-from log import info
+from services.log import info
 
 
 def RunCommand(is_interactive):
@@ -25,7 +25,7 @@ def RunCommand(is_interactive):
         return SUCCESS
 
     # Report selection
-    info("Selected", len(objects.curves), "curves and", len(objects.points), "points")
+    info("selected {} curves and {} points".format(len(objects.curves), len(objects.points)))
 
     # Preprocess objects into points
     points = sample(objects)
@@ -36,7 +36,7 @@ def RunCommand(is_interactive):
         return SUCCESS
 
     # Fit geometry
-    info("Fitting line to", len(points), "points.")
+    info("Fitting line to {} points.".format(len(points)))
     success, line = TryFitLineToPoints(points)
 
     # Fail hard on fit failure

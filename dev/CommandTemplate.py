@@ -5,7 +5,7 @@ This is a command template. It is used to create new commands.
 """
 
 from command import SUCCESS, FAILURE
-from log import info, error
+from services.log import info, error
 
 
 def RunCommand(is_interactive):
