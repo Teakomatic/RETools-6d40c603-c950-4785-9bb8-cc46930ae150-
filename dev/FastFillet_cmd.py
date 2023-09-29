@@ -30,7 +30,6 @@ FILLET_OPTIONS = {
     "arcExtension": True,
     "tolerance": doc.ModelAbsoluteTolerance,
     "angleTolerance": doc.ModelAngleToleranceDegrees,
-    "radius": 0.25,
 }
 
 
