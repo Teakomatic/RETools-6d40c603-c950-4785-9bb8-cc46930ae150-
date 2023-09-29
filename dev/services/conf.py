@@ -1,4 +1,3 @@
-import notify
 import rhinoscriptsyntax as rs
 
 # Folders
