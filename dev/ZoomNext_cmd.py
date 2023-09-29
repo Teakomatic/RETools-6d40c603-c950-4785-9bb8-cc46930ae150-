@@ -4,7 +4,7 @@ Zoom to next fillet in the document.
 Algorithm:
     1. Get all curves on the "Final" layer
     2. Find all endpoints of those curves
-    3. Select a ramdom endpoint
+    3. Select a random endpoint
     4. Find the neartest endpoint
     5. Zoom to both endpoints
 """
