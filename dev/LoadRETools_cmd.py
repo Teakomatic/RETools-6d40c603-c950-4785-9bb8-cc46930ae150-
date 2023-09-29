@@ -16,4 +16,4 @@ def RunCommand(is_interactive):
         debug("Loading RETools toolbar from {}".format(TOOLBAR_FILE_PATH))
         ToolbarFiles.Open(TOOLBAR_FILE_PATH)
     
-    info("ReTools Version {} was loaded.".format(version))
+    info("Loaded ReTools Version {}.".format(version))
