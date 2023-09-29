@@ -18,3 +18,6 @@ IMG_TYPES = ["jpg", "jpeg", "heic", "png", "gif"]
 
 # Image Reviewer
 PURE_REF = "C:\Program Files\PureRef\PureRef.exe"
+
+# Toolbars
+TOOLBAR_FILE_PATH = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\KyleTools\RhinoConfig\RE_toolbars.rui"
