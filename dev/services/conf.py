@@ -1,5 +1,8 @@
 import rhinoscriptsyntax as rs
 
+# Operating System: "Mac" or "Win"
+OS = "Win"
+
 # Folders
 BASE_FOLDER = rs.WorkingFolder()
 SCANS_FOLDER = BASE_FOLDER + "\\Scans"
@@ -19,4 +22,5 @@ IMG_TYPES = ["jpg", "jpeg", "heic", "png", "gif"]
 PURE_REF = "C:\Program Files\PureRef\PureRef.exe"
 
 # Toolbars
-TOOLBAR_FILE_PATH = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\KyleTools\RhinoConfig\RE_toolbars.rui"
+TOOLBAR_RUI_PATH = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\KyleTools\RhinoConfig\RE_toolbars.rui"
+TOOLBAR_PLIST_PATH = None
