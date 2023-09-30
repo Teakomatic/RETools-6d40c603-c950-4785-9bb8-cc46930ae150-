@@ -4,10 +4,9 @@
 
 Bootstrap the RETools plugin.
 
-Deals with the fact that the toolbar is a plist on Mac and a rui on Windows.
-
 Effects:
-- Load the RETools toolbar.
+- Loads the RETools toolbar.
+- Reports the RETools version.
 """
 
 from __plugin__ import version
@@ -25,11 +24,13 @@ else:
 
 def RunCommand(is_interactive):
     if OS == "Mac":
-        debug("Loading RETools toolbar from {}".format(TOOLBAR_PLIST_PATH))
-        MacPlatformService.LoadToolPaletteCollection(TOOLBAR_PLIST_PATH)
+        if not MacPlatformService.IsToolPaletteCollectionOpen(TOOLBAR_PLIST_PATH):
+            debug("Loading RETools toolbar from {}".format(TOOLBAR_PLIST_PATH))
+            MacPlatformService.LoadToolPaletteCollection(TOOLBAR_PLIST_PATH)
 
     else:
-        debug("Loading RETools toolbar from {}".format(TOOLBAR_RUI_PATH))
-        ToolbarFiles.Open(TOOLBAR_RUI_PATH)
+        if not ToolbarFiles.IsOpen(TOOLBAR_RUI_PATH):
+            debug("Loading RETools toolbar from {}".format(TOOLBAR_RUI_PATH))
+            ToolbarFiles.Open(TOOLBAR_RUI_PATH)
 
     info("Loaded ReTools Version {}.".format(version))
