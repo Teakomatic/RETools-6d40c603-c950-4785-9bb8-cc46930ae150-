@@ -29,7 +29,7 @@ def RunCommand(is_interactive):
             MacPlatformService.LoadToolPaletteCollection(TOOLBAR_PLIST_PATH)
 
     else:
-        if not ToolbarFiles.IsOpen(TOOLBAR_RUI_PATH):
+        if not ToolbarFiles.FindByPath(TOOLBAR_RUI_PATH):
             debug("Loading RETools toolbar from {}".format(TOOLBAR_RUI_PATH))
             ToolbarFiles.Open(TOOLBAR_RUI_PATH)
 
