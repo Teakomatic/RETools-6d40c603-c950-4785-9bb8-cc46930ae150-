@@ -1,10 +1,11 @@
 import System
 
 # The timestamp format is a .NET datetime format string.
-TIMESTAMP_FORMAT = "yyyy.MM.dd H:mm:ss.fff"
+DEFAULT_TIMESTAMP_FORMAT = "yy.MM.dd H:mm:ss.fff"
 
 
-def timestamp():
+def timestamp(timestamp_format=None):
     """Return a timestamp string."""
-    return System.DateTime.Now.ToString(TIMESTAMP_FORMAT)
+    timestamp_format = timestamp_format or DEFAULT_TIMESTAMP_FORMAT
+    return System.DateTime.Now.ToString(timestamp_format)
 
