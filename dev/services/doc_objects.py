@@ -49,6 +49,21 @@ class DocObjects:
     def DeselectAll():
         doc.Objects.UnselectAll()
 
+    @staticmethod
+    def AddCurve(curve):
+        doc.Objects.AddCurve(curve)
+    
+    @staticmethod
+    def AddCircle(circle):
+        doc.Objects.AddCircle(circle)
+    
+    @staticmethod
+    def AddLine(line):
+        doc.Objects.AddLine(line)
+    
+    @staticmethod
+    def AddPoint(point):
+        doc.Objects.AddPoint(point)
 
 AddCurve = doc.Objects.AddCurve
 AddCircle = doc.Objects.AddCircle
