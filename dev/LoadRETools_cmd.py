@@ -37,6 +37,6 @@ def RunCommand(is_interactive):
             debug("Loading RETools toolbar from {}".format(TOOLBAR_PATH))
             load_toolbar(TOOLBAR_PATH)
     else:
-        error("RETools toolbar not found at {}. Skipping.".format(TOOLBAR_PATH)
+        error("RETools toolbar not found at {}. Skipping.".format(TOOLBAR_PATH))
 
     info("Loaded RETools Version {}.".format(version))
