@@ -8,7 +8,7 @@ and deletes the original curves.
 from Rhino.Geometry.Circle import TryFitCircleToPoints
 
 from command import SUCCESS, FAILURE
-from doctools import AddCircle, DocObjects
+from dev.services.doc_objects import AddCircle, DocObjects
 from geometry import sample
 from services.log import info
 
