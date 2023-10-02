@@ -11,10 +11,6 @@ POINT = 1
 CURVE = 4
 
 
-class DocData:
-    pass
-
-
 class DocObjects:
     def __init__(self, items):
         self.curves = []
