@@ -17,7 +17,7 @@ from services.conf import OS
 from services.conf import TOOLBAR_PLIST_PATH
 from services.conf import TOOLBAR_RUI_PATH
 
-if OS == "Mac":
+if OS == "mac":
     from RhinoMac.Runtime import MacPlatformService
 
     TOOLBAR_PATH = TOOLBAR_PLIST_PATH

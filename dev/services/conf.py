@@ -1,7 +1,7 @@
 import rhinoscriptsyntax as rs
 
-# Operating System: "Mac" or "Win"
-OS = "Win"
+# Operating System: "mac" or "win"
+OS = "win"
 
 # Folders
 BASE_FOLDER = rs.WorkingFolder()
