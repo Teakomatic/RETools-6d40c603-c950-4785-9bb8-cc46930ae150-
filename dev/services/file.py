@@ -1,5 +1,5 @@
 import os
-from conf import CAD_TYPES
+from conf import CAD_TYPES, IMG_TYPES
 import rhinoscriptsyntax as rs
 
 def current_folder():
@@ -19,8 +19,7 @@ def get_files_recursive(folder, filetypes):
 
 
 def get_imgs_recursive(folder):
-    img_types = ["jpg", "jpeg", "heic", "png", "gif"]
-
+    img_types = IMG_TYPES
     return get_files_recursive(folder, img_types)
 
 
