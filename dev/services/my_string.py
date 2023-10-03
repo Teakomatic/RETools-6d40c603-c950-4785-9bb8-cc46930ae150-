@@ -1,0 +1,1 @@
+singe_quote = lambda s: "'{}'".format(s)
