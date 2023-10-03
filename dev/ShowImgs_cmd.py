@@ -7,20 +7,19 @@ This is a command template. It is used to create new commands.
 from command import SUCCESS, FAILURE
 from services.log import info, error
 
-from services import process
-from services import file
-from services import rhino
-
+from services.image_viewer import launch_imgs
+from services.file import get_imgs_recursive
+from services.rhino import current_folder
 
 def RunCommand(is_interactive):
     try:
-        workdir = rhino.current_folder()
+        workdir = current_folder()
     except:
         error("Failed to get current folder!")
         return FAILURE
 
     try:
-        imgs = file.get_imgs_recursive(workdir)
+        imgs = get_imgs_recursive(workdir)
     except:
         error("Failed to get images from work directory!")
         return FAILURE
@@ -30,6 +29,6 @@ def RunCommand(is_interactive):
         return SUCCESS
     
     else:
-        process.launch_imgs(imgs)
+        launch_imgs(imgs)
         return SUCCESS
 
