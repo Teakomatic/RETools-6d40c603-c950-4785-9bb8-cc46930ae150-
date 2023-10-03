@@ -20,7 +20,7 @@ CAD_TYPES = ["dxf", "dwg"]
 IMG_TYPES = ["jpg", "jpeg", "heic", "png", "gif"]
 
 # Image Reviewer
-PURE_REF = "C:\Program Files\PureRef\PureRef.exe"
+WIN_IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
 
 # Toolbars
 TOOLBAR_RUI_PATH = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\KyleTools\RhinoConfig\RE_toolbars.rui"
