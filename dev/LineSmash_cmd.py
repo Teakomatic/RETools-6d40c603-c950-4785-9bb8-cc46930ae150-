@@ -8,7 +8,7 @@ and deletes the original curves.
 from Rhino.Geometry.Line import TryFitLineToPoints
 
 from command import SUCCESS, FAILURE
-from dev.services.doc_objects import AddCurve, DocObjects
+from services.doc_objects import AddCurve, DocObjects
 from geometry import sample, DeformableLine
 from services.log import info
 
