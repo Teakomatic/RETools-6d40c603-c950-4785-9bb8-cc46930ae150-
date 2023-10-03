@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from Rhino.Geometry import BoundingBox
 import rhinoscriptsyntax as rs
 
-import points
+from geometry import points
 
 
 def silent(command):
