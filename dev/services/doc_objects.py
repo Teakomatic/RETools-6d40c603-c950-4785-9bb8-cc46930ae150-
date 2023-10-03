@@ -61,6 +61,16 @@ class DocObjects:
     def AddPoint(point):
         doc.Objects.AddPoint(point)
 
+    @staticmethod
+    def AddCurves(curves):
+        for curve in curves:
+            doc.Objects.AddCurve(curve)
+    
+    @staticmethod
+    def DeleteObjects(objects):
+        for obj in objects:
+            doc.Objects.Delete(obj)
+
 AddCurve = doc.Objects.AddCurve
 AddCircle = doc.Objects.AddCircle
 AddLine = doc.Objects.AddLine
