@@ -15,7 +15,7 @@ import System
 
 import my_time
 
-LOG_FILE = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\Logs\REToolsPy.log"
+LOG_FILE = "X:\REToolsPy.log"
 LOG_LEVEL = "D"
 LOG_MESSAGE_FORMAT = "{timestamp}({level}) {msg}"
 TIMESTAMP_FORMAT = "yy.MM.dd H:mm:ss.fff"

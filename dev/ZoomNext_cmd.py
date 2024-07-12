@@ -13,14 +13,14 @@ import Rhino
 from scriptcontext import doc
 import rhinoscriptsyntax as rs
 from Rhino.DocObjects import CurveObject
-import rhino
+from services import rhino
 
 from command import SUCCESS
 from services.log import info
 
 # Layer name to scan for geometry
 LAYER = "Final"
-MODE = "random"
+MODE = "lowest_left"
 def layer_curves(layer_name):
     """Return all curves on a layer."""
     layer_objects = doc.Objects.FindByLayer(layer_name)

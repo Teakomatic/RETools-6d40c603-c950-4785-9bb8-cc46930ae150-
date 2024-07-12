@@ -21,7 +21,8 @@ IMG_TYPES = ["jpg", "jpeg", "heic", "png", "gif"]
 
 # Image Reviewer
 WIN_IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
+MAC_IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
 
 # Toolbars
-TOOLBAR_RUI_PATH = "C:\Users\maxsu\OneDrive\Desktop\Max Work\Max Work\KyleTools\RhinoConfig\RE_toolbars.rui"
+TOOLBAR_RUI_PATH = "C:\Users\m\Desktop\intake\REtoolbar.rui"
 TOOLBAR_PLIST_PATH = None
