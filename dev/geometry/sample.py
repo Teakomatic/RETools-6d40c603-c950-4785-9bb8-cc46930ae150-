@@ -1,5 +1,7 @@
-QUARTER_INCH = 0.25
+from geometry import pointcloud
 
+
+QUARTER_INCH = 0.25
 
 def sample(objects, sampling_distance=QUARTER_INCH):
     """
@@ -17,8 +19,10 @@ def sample(objects, sampling_distance=QUARTER_INCH):
     if not objects:
         raise Exception("Sampler Error: Empty input.", objects)
 
+    samples = pointcloud.PointCloud()
+
     # Turn doc Points into Point3ds
-    samples = [pt.Geometry.Location for pt in objects.points]
+    samples += [pt.Geometry.Location for pt in objects.points]
 
     # Sample curve end points and interiors
     for curve in objects.curves:
