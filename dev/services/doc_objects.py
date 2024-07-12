@@ -37,6 +37,10 @@ class DocObjects:
         for obj in self.points + self.curves + self.others:
             doc.Objects.Delete(obj)
 
+    def transform(self, xform):
+        for item in self:
+            doc.Objects.Transform(item, xform, deleteOriginal=True)
+
     @classmethod
     def GetSelected(cls):
         return cls(doc.Objects.GetSelectedObjects(False, False))
@@ -48,15 +52,15 @@ class DocObjects:
     @staticmethod
     def AddCurve(curve):
         doc.Objects.AddCurve(curve)
-    
+
     @staticmethod
     def AddCircle(circle):
         doc.Objects.AddCircle(circle)
-    
+
     @staticmethod
     def AddLine(line):
         doc.Objects.AddLine(line)
-    
+
     @staticmethod
     def AddPoint(point):
         doc.Objects.AddPoint(point)
@@ -65,7 +69,7 @@ class DocObjects:
     def AddCurves(curves):
         for curve in curves:
             doc.Objects.AddCurve(curve)
-    
+
     @staticmethod
     def DeleteObjects(objects):
         for obj in objects:
