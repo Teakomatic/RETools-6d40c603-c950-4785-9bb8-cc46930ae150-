@@ -8,16 +8,15 @@ and deletes the original curves.
 from Rhino.Geometry.Circle import TryFitCircleToPoints
 
 from command import SUCCESS, FAILURE
-from services.doc_objects import AddCircle, DocObjects
 from geometry import sample
 from services.log import info
-
+from services import doc_objects
 
 def RunCommand(is_interactive):
     """Circlesmash selected curves."""
 
     # Grab selected items
-    objects = DocObjects.GetSelected()
+    objects = doc_objects.get_selected()
 
     # Fail soft for empty selection
     if not objects:
@@ -49,7 +48,7 @@ def RunCommand(is_interactive):
         return FAILURE
 
     # Add generated geometry to document
-    AddCircle(circle)
+    doc_objects.add_circle(circle)
 
     # Delete input geometry
     info("Deleting curves.")

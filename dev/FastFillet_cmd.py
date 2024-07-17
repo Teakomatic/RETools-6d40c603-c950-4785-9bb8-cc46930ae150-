@@ -10,18 +10,14 @@ In debug mode, we mark the starting points that we give to the native fillet com
 We fail soft for all errors, so that we do not interupt the repeat/* macro
 """
 
-import math
-
 from Rhino.Geometry.Curve import CreateFilletCurves
-from Rhino.Geometry import Point3d
 from scriptcontext import doc
-from Rhino.Collections import Point3dList
 
 from command import SUCCESS
-from services.doc_objects import DocObjects, AddPoint, AddLine
 from services.log import info, error, debug
 from geometry import closest, ease
 from repo import radius_repo
+from services import doc_objects
 
 DEBUG = False
 
@@ -80,7 +76,7 @@ def select_curves():
         tuple[list[curve], int]: The selected curves and the number of curves
     """
     # User Prompt for Curve Selection (Currently automatic)
-    doc_curves = DocObjects.GetSelected().curves
+    doc_curves = doc_objects.get_selected().curves
     curves = [item.Geometry for item in doc_curves]
     n = len(curves)
 
@@ -90,7 +86,7 @@ def select_curves():
 
         # Deselect if 3+ objects selected
         if n > 2:
-            doc.Objects.UnselectAll()
+            doc_objects.UnselectAll()
 
         # n = 1: Keep object selected in case self fillet fails
         # This allows user to select a second object on next attempt
@@ -175,15 +171,15 @@ def perform_fillet(curves, n, radius):
 
     # Parameter Tracing
     if DEBUG:
-        AddPoint(p)
-        AddPoint(q)
-        AddLine(p, q)
+        doc_objects.add_point(p)
+        doc_objects.add_point(q)
+        doc_objects.add_line(p, q)
 
     # Result Validation
     if not fillet:
         # Deselect inputs if failed with two curves
         if n == 2:
-            DocObjects.DeselectAll()
+            doc_objects.deselect_all()
         info("Fillet Failed")
 
         raise FailSoft(FilletFailure)
@@ -205,12 +201,12 @@ def RunCommand(is_interactive):
         type = e.args[0]
         error("Operation soft failed with {}".format(type))
         return SUCCESS
-    
+
     # Cleanup
-    DocObjects.DeleteObjects(doc_curves)
+    doc_objects.delete_objects(doc_curves)
 
     # Finalization
-    DocObjects.AddCurves(fillet_success)
+    doc_objects.add_curves(fillet_success)
 
     return SUCCESS
 

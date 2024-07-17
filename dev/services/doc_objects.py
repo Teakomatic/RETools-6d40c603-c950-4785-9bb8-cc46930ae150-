@@ -5,6 +5,8 @@ document and docobjects.
 
 from scriptcontext import doc
 from rhinoscriptsyntax import ObjectType
+from services.func import lift
+from services import log
 
 # Rhino document object types
 POINT = 1
@@ -24,7 +26,7 @@ class DocObjects:
             elif type == POINT:
                 self.points.append(item)
             else:
-                info("Warning: Selected nonstandard geometry")
+                log.info("Warning: Selected nonstandard geometry")
                 self.others.append(item)
 
     def __nonzero__(self):
@@ -34,48 +36,26 @@ class DocObjects:
         return iter(self.points + self.curves)
 
     def delete(self):
-        for obj in self.points + self.curves + self.others:
-            doc.Objects.Delete(obj)
+        delete_objects(self.points + self.curves + self.others)
+        self.curves = []
+        self.points = []
+        self.others = []
 
     def transform(self, xform):
         for item in self:
             doc.Objects.Transform(item, xform, deleteOriginal=True)
 
-    @classmethod
-    def GetSelected(cls):
-        return cls(doc.Objects.GetSelectedObjects(False, False))
 
-    @staticmethod
-    def DeselectAll():
-        doc.Objects.UnselectAll()
+# Adding geometry to document
+add_curve = doc.Objects.AddCurve
+add_curves = lift(add_curve)
+add_circle = doc.Objects.AddCircle
+add_line = doc.Objects.AddLine
+add_point = doc.Objects.AddPoint
 
-    @staticmethod
-    def AddCurve(curve):
-        doc.Objects.AddCurve(curve)
+# Selection tools
+deselect_all = doc.Objects.UnselectAll
+get_selected = lambda: DocObjects(doc.Objects.GetSelectedObjects(False, False))
 
-    @staticmethod
-    def AddCircle(circle):
-        doc.Objects.AddCircle(circle)
-
-    @staticmethod
-    def AddLine(line):
-        doc.Objects.AddLine(line)
-
-    @staticmethod
-    def AddPoint(point):
-        doc.Objects.AddPoint(point)
-
-    @staticmethod
-    def AddCurves(curves):
-        for curve in curves:
-            doc.Objects.AddCurve(curve)
-
-    @staticmethod
-    def DeleteObjects(objects):
-        for obj in objects:
-            doc.Objects.Delete(obj)
-
-AddCurve = doc.Objects.AddCurve
-AddCircle = doc.Objects.AddCircle
-AddLine = doc.Objects.AddLine
-AddPoint = doc.Objects.AddPoint
+# Deleting objects
+delete_objects = lift(doc.Objects.Delete)

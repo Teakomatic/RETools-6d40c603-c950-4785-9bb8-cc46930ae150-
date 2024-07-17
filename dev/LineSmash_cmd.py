@@ -8,16 +8,15 @@ and deletes the original curves.
 from Rhino.Geometry.Line import TryFitLineToPoints
 
 from command import SUCCESS, FAILURE
-from services.doc_objects import AddCurve, DocObjects
 from geometry import sample, DeformableLine
 from services.log import info
-
+from services import doc_objects
 
 def RunCommand(is_interactive):
     """Linesmash selected curves."""
 
     # Grab selected items
-    objects = DocObjects.GetSelected()
+    objects = doc_objects.get_selected()
 
     # Fail soft for empty selection
     if not objects:
@@ -48,7 +47,7 @@ def RunCommand(is_interactive):
     line = DeformableLine(line)
 
     # Add generated geometry to document
-    AddCurve(line)
+    doc_objects.add_curve(line)
 
     # Delete input geometry
     info("Deleting inputs.")
