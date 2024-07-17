@@ -3,6 +3,7 @@ from sample import sample
 from interpolate import interpolate
 from closest import closest
 from ease import ease
+from flatten import flatten
 
 
 from rhinoscriptsyntax import VectorAngle as angle
