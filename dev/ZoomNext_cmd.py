@@ -13,10 +13,8 @@ import Rhino
 from scriptcontext import doc
 import rhinoscriptsyntax as rs
 from Rhino.DocObjects import CurveObject
-from services import rhino
+from services import rhino, log
 
-from command import SUCCESS
-from services.log import info
 
 # Layer name to scan for geometry
 LAYER = "Final"
@@ -34,10 +32,10 @@ def RunCommand(is_interactive):
     pairs_estimated = len(end_points)/2
     
     if not end_points:
-        info("No endpoints found. Nothing to do!")
-        return SUCCESS
+        log.info("No endpoints found. Nothing to do!")
+        return 0
 
-    info("Fillets left: {}".format(pairs_estimated))
+    log.info("Fillets left: {}".format(pairs_estimated))
 
     if MODE == "random":
         rhino.zoom_random_close_pair(end_points)
@@ -48,5 +46,5 @@ def RunCommand(is_interactive):
     if MODE == "lowest_left":
         rhino.zoom_upper_left_close_pair(end_points)
 
-    return SUCCESS
+    return 0
      
