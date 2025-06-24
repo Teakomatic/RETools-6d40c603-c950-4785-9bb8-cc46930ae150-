@@ -1,9 +1,10 @@
 import os
 from conf import CAD_TYPES, IMG_TYPES
 import rhinoscriptsyntax as rs
+import Rhino
 
 def current_folder():
-    return rs.WorkingFolder()
+    return Rhino.ApplicationSettings.FileSettings.WorkingFolder
 
 
 def get_files_recursive(folder, filetypes):
