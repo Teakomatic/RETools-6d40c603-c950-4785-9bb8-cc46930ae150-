@@ -7,10 +7,8 @@ and deletes the original curves.
 
 from Rhino.Geometry.Line import TryFitLineToPoints
 
-from command import SUCCESS, FAILURE
 from geometry import sample, DeformableLine
-from services.log import info
-from services import doc_objects
+from services import doc_objects, log
 
 def RunCommand(is_interactive):
     """Linesmash selected curves."""
@@ -20,28 +18,28 @@ def RunCommand(is_interactive):
 
     # Fail soft for empty selection
     if not objects:
-        info("No items selected. Doing nothing.")
-        return SUCCESS
+        log.info("No items selected. Doing nothing.")
+        return 0
 
     # Report selection
-    info("selected {} curves and {} points".format(len(objects.curves), len(objects.points)))
+    log.info("selected {} curves and {} points".format(len(objects.curves), len(objects.points)))
 
     # Preprocess objects into points
     points = sample(objects)
 
     # Fail soft for single point sample
     if len(points) == 1:
-        info("Only one point in input sample. Doing nothing.")
-        return SUCCESS
+        log.info("Only one point in input sample. Doing nothing.")
+        return 0
 
     # Fit geometry
-    info("Fitting line to {} points.".format(len(points)))
+    log.info("Fitting line to {} points.".format(len(points)))
     success, line = TryFitLineToPoints(points)
 
     # Fail hard on fit failure
     if not success:
-        info("Line Fit Error: Fit operation has failed")
-        return FAILURE
+        log.info("Line Fit Error: Fit operation has failed")
+        return 1
 
     # Generate a deformable line
     line = DeformableLine(line)
@@ -50,7 +48,7 @@ def RunCommand(is_interactive):
     doc_objects.add_curve(line)
 
     # Delete input geometry
-    info("Deleting inputs.")
+    log.info("Deleting inputs.")
     objects.delete()
 
-    return SUCCESS
+    return 0

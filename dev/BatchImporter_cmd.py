@@ -15,25 +15,21 @@ Effects:
 - Close Rhino.
 """
 
-
-from services import info, error, FAILURE
-
-from services.import_tools import import_dxfs
-from services.rhino import current_folder, no_redraw, save, close
-
+from services import log, rhino, import_tools
 
 def RunCommand(is_interactive):
-    folder = current_folder()
-    info("Importing DXFs from {}".format(folder))
+    folder = file.current_folder()
+    log.info("Importing DXFs from {}".format(folder))
 
     try:
-        with no_redraw():
-            import_dxfs(folder, border=20)
-            info("Import succeeded. Saving...")
-            save()
-            info("Save succeeded. Closing...")
-            close()
+        with rhino.no_redraw():
+            import_tools.import_dxfs(folder, border=20)
+            log.info("Import succeeded. Saving...")
+            rhino.save()
+            log.info("Save succeeded. Closing...")
+            rhino.close()
+        return 0
 
     except Exception as e:
         error("Error encountered: {}".format(e))
-        return FAILURE
+        return 1

@@ -4,10 +4,9 @@ This is a command template. It is used to create new commands.
 {command details here}
 """
 
-from command import SUCCESS, FAILURE
-from services.log import info, error
+from services import log
 
 
 def RunCommand(is_interactive):
-    info("Running command template")
-    return SUCCESS
+    log.info("Running command template")
+    return 0

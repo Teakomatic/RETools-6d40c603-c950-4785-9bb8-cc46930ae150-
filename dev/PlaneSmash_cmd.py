@@ -14,7 +14,7 @@ def RunCommand(is_interactive):
     # This lets us use the command in "repeat" macros
     if not selection:
         log.info("No items selected. Doing nothing.")
-        return command.SUCCESS
+        return 0
 
     # Report selection
     log.info(

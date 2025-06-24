@@ -13,23 +13,19 @@ Effects:
 
 """
 
-
-from services import info, error, FAILURE, SUCCESS
-
-from services.import_tools import import_dxfs
-from services.rhino import current_folder, no_redraw
-
+from services import file, log, import_tools, rhino
 
 def RunCommand(is_interactive):
-    folder = current_folder()
-    info("Importing DXFs from {}".format(folder))
+    
+    folder = file.current_folder()
 
     try:
-        with no_redraw():
-            import_dxfs(folder, border=20)
-            info("Import succeeded.")
-            return SUCCESS
+        with rhino.no_redraw():
+            log.info("Importing DXFs from {}".format(folder))
+            import_tools.import_dxfs(folder, border=20)
+            log.info("Import succeeded.")
+            return 0
 
     except Exception as e:
-        error("Error encountered: {}".format(e))
-        return FAILURE
+        log.error("Error encountered: {}".format(e))
+        return 1
