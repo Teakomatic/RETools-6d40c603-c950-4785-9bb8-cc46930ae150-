@@ -3,7 +3,7 @@ import geometry
 
 class PointCloud(list):
 
-    @cached_property
+    @property
     def centroid(self):
         """
         Computes the center of mass of the point cloud
@@ -14,7 +14,7 @@ class PointCloud(list):
         # Compute point cloud average
         return sum(self, geometry.Origin) / len(self)
 
-    @cached_property
+    @property
     def normal(self):
         """
         Computes the normal of a point cloud.
