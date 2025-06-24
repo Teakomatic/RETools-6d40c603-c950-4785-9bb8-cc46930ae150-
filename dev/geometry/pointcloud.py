@@ -1,5 +1,5 @@
-from services.decorator import cached_property
 import geometry
+from services import log
 
 class PointCloud(list):
 
@@ -26,6 +26,10 @@ class PointCloud(list):
         # Compute normal
         plane = geometry.fit_plane(self)  # TODO: handle errors
         normal = plane.Normal
+
+        if not normal.IsUnitVector:
+            log.warning("Generated non-unit normal: {}. Unitizing.".format(normal))
+            normal.Unitize()
 
         # Correct downward facing normals
         if normal.Z < 0:
