@@ -1,5 +1,6 @@
 from services import log
 import geometry
+import math
 
 REPORT = "Correction angle: {}, axis: {}."
 
@@ -25,6 +26,7 @@ def flatten(objects):  # Type: DocObjects -> Transform
     # Compute correction transform
     correction_angle = geometry.angle(p.normal, geometry.Z)
     correction_axis = geometry.cross(p.normal, geometry.Z)
+    correction_axis.Unitize()
     correction_matrix = geometry.rotate(correction_angle, correction_axis, p.centroid)
 
     # Report and verify transform
