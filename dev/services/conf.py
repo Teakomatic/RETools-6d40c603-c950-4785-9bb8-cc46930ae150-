@@ -3,10 +3,18 @@ import rhinoscriptsyntax as rs
 # Operating System: "mac" or "win"
 OS = "win"
 
+# Logging
+LOG_FILE = r"\\VBOXSVR\logs\REToolsPy.log"
+LOG_LEVEL = "D"
+DEBUG = True
+LOG_MESSAGE_FORMAT = "{timestamp}({level}) {msg}"
+# DotNet timestamp format
+TIMESTAMP_FORMAT = "yy.MM.dd H:mm:ss.fff"
+
 # Folders
 BASE_FOLDER = rs.WorkingFolder()
-SCANS_FOLDER = BASE_FOLDER + "\\Scans"
-PICS_FOLDER = BASE_FOLDER + "\\Pics"
+SCANS_FOLDER = BASE_FOLDER + r"\Scans"
+PICS_FOLDER = BASE_FOLDER + r"\Pics"
 
 # Import Format
 SHORT_ITEM_LENGTH = 36
@@ -19,10 +27,15 @@ WORK_LAYER = "Final"
 CAD_TYPES = ["dxf", "dwg"]
 IMG_TYPES = ["jpg", "jpeg", "heic", "png", "gif"]
 
-# Image Reviewer
-WIN_IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
-MAC_IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
+# Viewers
+if OS == "win":
+    FILE_EXPLORER = "explorer"
+    IMG_VIEWER = "C:\Program Files\PureRef\PureRef.exe"
+
+else:
+    FILE_EXPLORER = "open"
+    IMG_VIEWER = "open"
 
 # Toolbars
-TOOLBAR_RUI_PATH = "C:\Users\m\Desktop\intake\REtoolbar.rui"
+TOOLBAR_RUI_PATH = "\\VBOXSVR\setup\REtoolbar.rui"
 TOOLBAR_PLIST_PATH = None
