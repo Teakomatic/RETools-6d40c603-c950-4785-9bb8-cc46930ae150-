@@ -19,8 +19,7 @@ from Rhino.Geometry import Point3d
 from conf import TEXT_HEIGHT, TEXT_HEIGHT_3D, SHORT_ITEM_LENGTH
 from file import name, get_dxfs_recursive, current_folder
 from rhino import bbox, silent, text_centered, text_centered_vertical
-from log import info, debug
-
+import log
 
 def import_dxf(file):
     """
@@ -102,12 +101,12 @@ def import_dxfs(source_folder, border):
 
     # Report items
     if not import_items:
-        info("No items to import. Doing nothing.")
+        log.info("No items to import. Doing nothing.")
         return
 
-    info("Importing {} items:".format(len(import_items)))
+    log.info("Importing {} items:".format(len(import_items)))
     for dxf in import_items:
-        info(name(dxf))
+        log.info(name(dxf))
 
     # Import  and preprocess item metadata
     _3d_imports = []
