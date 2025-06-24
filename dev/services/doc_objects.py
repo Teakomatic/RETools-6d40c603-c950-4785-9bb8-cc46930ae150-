@@ -3,9 +3,9 @@ This module contains functions for interacting with Rhino's
 document and docobjects.
 """
 
+import functools
 from scriptcontext import doc
-from rhinoscriptsyntax import ObjectType
-from services.func import lift
+import rhinoscriptsyntax as rs
 from services import log
 
 # Rhino document object types
@@ -20,7 +20,7 @@ class DocObjects:
         self.others = []
 
         for item in items:
-            type = ObjectType(item)
+            type = rs.ObjectType(item)
             if type == CURVE:
                 self.curves.append(item)
             elif type == POINT:
@@ -48,7 +48,7 @@ class DocObjects:
 
 # Adding geometry to document
 add_curve = doc.Objects.AddCurve
-add_curves = lift(add_curve)
+add_curves = functools.partial(map, add_curve)
 add_circle = doc.Objects.AddCircle
 add_line = doc.Objects.AddLine
 add_point = doc.Objects.AddPoint
@@ -58,4 +58,4 @@ deselect_all = doc.Objects.UnselectAll
 get_selected = lambda: DocObjects(doc.Objects.GetSelectedObjects(False, False))
 
 # Deleting objects
-delete_objects = lift(doc.Objects.Delete)
+delete_objects = functools.partial(map, doc.Objects.Delete)
